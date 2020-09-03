@@ -20,4 +20,7 @@ def containsNearbyAlmostDuplicate(nums, k, t) -> bool:
         i += 1
     return False
 
-print(containsNearbyAlmostDuplicate([1],1,1))
+'''
+Runtime: 68ms - 62.46%
+Memory: 16.7MB - 27.95%
+'''
