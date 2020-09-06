@@ -9,12 +9,14 @@ def trapRainWater(heightMap):
     m, n = len(heightMap), len(heightMap[0])
     pq = []
     visited = [[False for c in range(n)] for r in range(m)]
+    queued = [[False for c in range(n)] for r in range(m)]
     MAX, water = 0, 0
 
     def pq_enqueue(r, c):
-        if not visited[r][c]:
+        if not visited[r][c] and not queued[r][c]:
             hq.heappush(pq, [heightMap[r][c], r, c])
-
+            queued[r][c] = True
+            
     for r in range(m):
         pq_enqueue(r, 0)
         pq_enqueue(r, n - 1)
