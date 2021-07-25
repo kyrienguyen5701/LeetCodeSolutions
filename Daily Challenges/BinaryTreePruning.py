@@ -7,8 +7,8 @@ A subtree of a node node is node plus every node that is a descendant of node.
 def pruneTree(root):
     if root is None:
         return None
-    root.left = self.pruneTree(root.left)
-    root.right = self.pruneTree(root.right)
+    root.left = pruneTree(root.left)
+    root.right = pruneTree(root.right)
     if root.val == 0 and root.left is None and root.right is None:
         return None
     return root
