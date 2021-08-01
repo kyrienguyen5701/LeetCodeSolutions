@@ -6,21 +6,25 @@ The distance between two adjacent cells is 1.
 from collections import deque
 
 def updateMatrix(mat):
-    q, visited = deque(), set()
-    for i in range(len(mat)):
-        for j in range(len(mat[0])):
-            if mat[i][j] == 0:
-                visited.add((i,j))
-                q.append((i,j))
-    
-    while q:
-        x,y = q.popleft()
-        for direction in [(1,0), (-1,0), (0,1), (0,-1)]:
-            newX, newY = x + direction[0], y + direction[1]
-            if newX >= 0 and newX < len(mat) and newY >= 0 and newY < len(mat[0]) and (newX, newY) not in visited:
-                    mat[newX][newY] = mat[x][y] + 1
-                    visited.add((newX, newY))
-                    q.append((newX, newY))
+    checked = []
+    row, col = len(mat), len(mat[0])
+    for i in range(row):
+        for j in range(col):
+            if mat[i][j] != 0:
+                checked.append([i, j])
+    dist = 1
+    while checked:
+        new_checked = []
+        for i, j in checked:
+            if (i == 0 or mat[i-1][j] >= dist) \
+                and (j == 0 or mat[i][j-1] >= dist) \
+                and (i == row - 1 or mat[i+1][j] >= dist) \
+                and (j == col - 1 or mat[i][j+1] >= dist):
+                mat[i][j] = dist + 1
+                new_checked.append((i,j))
+        dist += 1
+        checked = new_checked
+                
     return mat
 
 '''
